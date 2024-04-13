@@ -1,0 +1,201 @@
+<html lang="en"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>I-Money</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+    <style>
+        #income {
+        border-collapse: collapse;
+        width: 100%;
+        margin: 20px auto;
+    }
+    
+    #income th, td {
+        border: 1px solid #ece9e9;
+        padding: 8px;
+        text-align: left;
+    }
+    
+    #income th {
+        background-color:  #0B5ED7;
+        color:white;
+
+    }
+    
+    #income tr:nth-child(even) {
+        background-color: #e9e9e9;
+    }
+    
+    #expenses {
+        border-collapse: collapse;
+        width: 100%;
+        margin: 20px auto;
+        
+    }
+    
+    #expenses th, td {
+        border: 1px solid #581313;
+        padding: 8px;
+        text-align: left;
+    }
+    
+    #expenses th {
+        background-color: #d70b0b;
+        color:white;
+    }
+    
+    #expenses tr:nth-child(even) {
+        background-color: #e6e4e4;
+    }
+    @media screen and (max-width: 400px) {
+    #col1{
+        display: flex;
+        flex-direction: column;
+        margin-left: -70px;
+    }
+    }
+    </style>
+</head>
+<body style="background-color: #f2f0f0;" cz-shortcut-listen="true">
+    <nav class="navbar">
+        <div class="container">
+          <a class="navbar-brand" href="#">
+            <h2 class="text-secondary"><span class="text-success">I</span>-Money</h2>
+          </a>
+          <button class="btn btn-danger" onclick="logout()">Logout</button>
+        </div>
+        </nav>
+
+        <div id="username" style="font-weight: 300; font-size: 70px;" class="text-center text-secondary"></div>
+
+
+    <div class=" op container mt-5 " style="margin-left: 0px;">
+        <div id="col1" class="row d-flex justify-content-center">
+            <div class="col-6 p-3">
+                <div class="col-md-border rounded-3 bg-body-dark m-3 mx-5 p-4 border " style="width: 500px;">
+                    <h4 class="text-center text-secondary">Current Amount</h4>
+                    <input type="text" class="form-control mt-2 " id="description" placeholder="Enter Description">
+                    <input type="text" class="form-control mt-2" id="salary" placeholder="Enter Amount">
+                    <button class="btn btn-success my-2 container" onclick="savings()">Submit</button>
+                </div>
+            </div>
+            <div class="col-6 p-3">
+                <div class="col-md-border rounded-3 bg-body-dark m-3 mx-5 p-4 border" style="width: 500px;">
+                    <h4 class="text-center text-secondary">Expence Amount</h4>
+                    <input type="text" class="form-control mt-2 " id="edescription" placeholder="Enter Description">
+                    <input type="text" class="form-control mt-2" id="esalary" placeholder="Enter Amount">
+                    <button class="btn btn-success my-2 container" onclick="expense()">Submit</button>
+                </div>
+            </div>
+
+
+            
+        </div>
+
+    </div>    
+<br>
+    <div class="col-md- border rounded-3 bg-body-tertiary container" style="width: 500px;">
+        <div id="result"><h2 class="text-center text-secondary">Account Balance</h2></div>
+    </div>
+    <br>
+    <div class="container mt-5">
+        <div class="row border rounded-3 bg-body-tertiary">
+            <div class="col-md- ">
+              <center> <h3 class="text mt-2 text-secondary">Budget</h3></center> 
+                <table id="income">
+                    <thead>
+                        <tr>
+                            <th class="border rounded-1">Type</th>
+                            <th class="border rounded-1">Amount</th>
+                            <th class="border rounded-1">Balance</th>
+                        </tr>
+                    </thead>
+                    <tbody class=" rounded-1">
+
+                    </tbody>
+                </table>
+            </div>
+            <div class="ip p-3 bg-body-dark">
+                <center> <h3 class="text mt-2 text-secondary">Expense</h3></center>
+                <table id="expenses">
+                    <thead>
+                        <tr>
+                            <th class="border rounded-1">Type</th>
+                            <th class="border rounded-1">Amount</th>
+                            <th class="border rounded-1">Balance</th>
+                        </tr>
+                    </thead>
+                    <tbody class=" rounded-1">
+                        
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- footer -->
+    <footer class="bg-body-tertiary text-center text-lg-start mt-5">
+        <!-- Copyright -->
+        <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.05);">
+          © 2024 Copyright:
+          <a class="text-body" href="./index.html">I-Money.com</a>
+        </div>
+        <!-- Copyright -->
+      </footer>
+
+    <script>
+        logname=localStorage.getItem('loginkey');
+           sdetails=JSON.parse(localStorage.getItem(logname));
+           username.innerHTML=`Welcome ${sdetails.Usrnm}` ;
+
+        function savings(){
+            des=description.value;
+            sal=salary.value;
+            const valuetable=income;
+            let key=localStorage.getItem('loginkey');
+            userdetails=JSON.parse(localStorage.getItem(key));
+            userdetails.balance += +sal;
+            localStorage.setItem(key,JSON.stringify(userdetails));
+            result.innerHTML=`<h2 class="text-center">${userdetails.balance}</h2>`
+
+
+            const newRow=valuetable.querySelector("tbody").insertRow();
+            const cell1=newRow.insertCell(0);
+            const cell2=newRow.insertCell(1);
+            const cell3=newRow.insertCell(2);
+
+            cell1.innerHTML=des;
+            cell2.innerHTML=sal;
+            cell3.innerHTML=userdetails.balance;
+        }
+
+        function expense(){
+            edes=edescription.value;
+            esal=esalary.value;
+            valtable=expenses;
+            
+            let ekey=localStorage.getItem('loginkey');
+            euserdetails=JSON.parse(localStorage.getItem(ekey));
+            console.log(edes,esal);
+            euserdetails.balance -= +esal;
+            localStorage.setItem(ekey,JSON.stringify(euserdetails));
+            result.innerHTML=`<h2 class="text-center">${euserdetails.balance}</h2>`;
+
+            const enewRow=valtable.querySelector("tbody").insertRow();
+            const ecell1=enewRow.insertCell(0);
+            const ecell2=enewRow.insertCell(1);
+            const ecell3=enewRow.insertCell(2);
+
+            ecell1.innerHTML=edes;
+            ecell2.innerHTML=esal;
+            ecell3.innerHTML=euserdetails.balance;
+
+        }
+
+        function logout(){
+            window.location='./index.html';
+        }
+    </script>
+
+</body></html>
